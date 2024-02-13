@@ -22,7 +22,7 @@ class SectionProducts extends StatelessWidget {
           const SizedBox(height: 10.0),
           SizedBox(
             width: double.infinity,
-            height: 150.0,
+            height: 170.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: products.length,
@@ -45,7 +45,10 @@ class SectionProducts extends StatelessWidget {
                         height: 100.0,
                       ),
                     ),
-                    Text(products[i].name)
+                    Expanded(
+                      child: Text(products[i].name, textAlign: TextAlign.center,),
+                    ),
+                    Text(products[i].price)
                   ],
                 ),
               )
