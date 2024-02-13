@@ -5,6 +5,15 @@ class InformationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          Text("Información"),
+          Text("Lugar de entrega:"),
+          Text("Más información sobre la entrega"),
+        ],
+      ),
+    );
   }
 }
