@@ -12,7 +12,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   @override
   void initState() {
     final homeBloc = BlocProvider.of<HomeBloc>(context);
@@ -24,15 +23,19 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(),
-      drawer: HomeMenu(scaffoldKey: scaffoldKey),
-      body: const Column(
-        children: [
-          MediosPay()
-        ],
-      )
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return Scaffold(
+          key: scaffoldKey,
+          appBar: AppBar(),
+          drawer: HomeMenu(scaffoldKey: scaffoldKey),
+          body: Column(
+            children: [
+              state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox()
+            ],
+          )
+        );
+      },
     );
   }
 }
