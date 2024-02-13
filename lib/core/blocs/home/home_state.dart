@@ -46,7 +46,7 @@ class HomeState extends Equatable {
   );
   
   @override
-  List<Object?> get props => [isLoadingMethosPay, isLoadingDiscount, isLoadingProducts, isLoadingStores, methodsPay, discount, stores, isLoadingProducts];
+  List<Object?> get props => [isLoadingMethosPay, isLoadingDiscount, isLoadingProducts, isLoadingStores, methodsPay, discount, stores, isLoadingProducts, products];
 }
 
 final class HomeInitial extends HomeState {}
