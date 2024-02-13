@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -20,6 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<IsLoader>((event, emit) {
       emit(state.copyWith(
+        isLoadingBeer: event.isLoadingBeer,
         isLoadingMethosPay: event.isLoadingMethosPay,
         isLoadingDiscount: event.isLoadingDiscount,
         isLoadingStores: event.isLoadingStores,
@@ -46,7 +48,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future getProducts() async {
-    add( const IsLoader(isLoadingProducts: true) );
+    add( const IsLoader(isLoadingProducts: true, isLoadingBeer: true) );
     var url = Uri.https('shop-beer-default-rtdb.firebaseio.com', 'products.json');
     var response = await http.get(url);
     if (response.statusCode == 200) {
@@ -56,6 +58,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       add( Products(productsModel) );
     }
     getMethodsPay();
+    timerLoaderBeer();
   }
 
   Future getMethodsPay() async {
@@ -94,5 +97,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       add( Stores(storesModel) );
       add( const IsLoader(isLoadingStores: false) );
     }
+  }
+
+  timerLoaderBeer() {
+    Future.delayed(const Duration(seconds: 8), () {
+      add( const IsLoader( isLoadingBeer: false ) );
+    });
   }
 }

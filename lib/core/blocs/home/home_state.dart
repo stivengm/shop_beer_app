@@ -2,6 +2,7 @@ part of 'home_bloc.dart';
 
 class HomeState extends Equatable {
 
+  final bool isLoadingBeer;
   final bool isLoadingMethosPay;
   final bool isLoadingProducts;
   final bool isLoadingDiscount;
@@ -12,6 +13,7 @@ class HomeState extends Equatable {
   final List<StoresModel> stores;
 
   const HomeState({
+    this.isLoadingBeer = false,
     this.isLoadingMethosPay = false,
     this.isLoadingProducts = false,
     this.isLoadingDiscount = false,
@@ -26,6 +28,7 @@ class HomeState extends Equatable {
       stores = stores ?? const [];
 
   HomeState copyWith({
+    bool? isLoadingBeer,
     bool? isLoadingMethosPay,
     bool? isLoadingProducts,
     bool? isLoadingDiscount,
@@ -35,6 +38,7 @@ class HomeState extends Equatable {
     List<DiscountModel>? discount,
     List<StoresModel>? stores
   }) => HomeState(
+    isLoadingBeer: isLoadingBeer ?? this.isLoadingBeer,
     isLoadingMethosPay: isLoadingMethosPay ?? this.isLoadingMethosPay,
     isLoadingProducts: isLoadingProducts ?? this.isLoadingProducts,
     isLoadingDiscount: isLoadingDiscount ?? this.isLoadingDiscount,
@@ -46,7 +50,7 @@ class HomeState extends Equatable {
   );
   
   @override
-  List<Object?> get props => [isLoadingMethosPay, isLoadingDiscount, isLoadingProducts, isLoadingStores, methodsPay, discount, stores, isLoadingProducts, products];
+  List<Object?> get props => [isLoadingBeer, isLoadingMethosPay, isLoadingDiscount, isLoadingProducts, isLoadingStores, methodsPay, discount, stores, isLoadingProducts, products];
 }
 
 final class HomeInitial extends HomeState {}

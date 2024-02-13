@@ -8,11 +8,12 @@ sealed class HomeEvent extends Equatable {
 }
 
 class IsLoader extends HomeEvent {
+  final bool? isLoadingBeer;
   final bool? isLoadingMethosPay;
   final bool? isLoadingDiscount;
   final bool? isLoadingProducts;
   final bool? isLoadingStores;
-  const IsLoader({this.isLoadingMethosPay, this.isLoadingDiscount, this.isLoadingStores, this.isLoadingProducts});
+  const IsLoader({this.isLoadingBeer, this.isLoadingMethosPay, this.isLoadingDiscount, this.isLoadingStores, this.isLoadingProducts});
 }
 
 class Products extends HomeEvent {
