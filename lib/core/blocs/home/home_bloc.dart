@@ -26,11 +26,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future getMethodsPay() async {
+    add( const IsLoader(isLoadingMethosPay: true) );
     var url = Uri.https('shop-beer-default-rtdb.firebaseio.com', 'medios_pago.json');
     var response = await http.get(url);
     if (response.statusCode == 200) {
       final jsonProductsModel = jsonDecode(response.body);
       final List<MethodsPayModel> methodsModel = jsonProductsModel.map<MethodsPayModel>((m) => MethodsPayModel.fromJson(Map<String, dynamic>.from(m))).toList();
+      add( const IsLoader(isLoadingMethosPay: false) );
       add( MethodsPay(methodsModel) );
     }
   }

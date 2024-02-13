@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_beer_app/core/blocs/home/home_bloc.dart';
 import 'package:shop_beer_app/ui/drawers/home_drawer.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/medios_pay.dart';
+import 'package:shop_beer_app/ui/widgets/loader_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -25,7 +26,8 @@ class _HomeViewState extends State<HomeView> {
 
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return Scaffold(
+        return state.isLoadingMethosPay ? const LoaderWidget() : 
+        Scaffold(
           key: scaffoldKey,
           appBar: AppBar(),
           drawer: HomeMenu(scaffoldKey: scaffoldKey),
