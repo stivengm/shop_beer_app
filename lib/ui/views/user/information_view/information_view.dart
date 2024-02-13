@@ -45,8 +45,11 @@ class InformationView extends StatelessWidget {
                             title: "Más información sobre la entrega"),
                         TextFormField(
                           decoration: const InputDecoration(
-                              border: OutlineInputBorder()),
-                        )
+                              border: OutlineInputBorder(),
+                              hintText: 'Torre 1, apartamento 302'),
+                          
+                        ),
+                        Text("Sea específico con la información", style: Theme.of(context).textTheme.headlineMedium!.copyWith( fontSize: 10.0 ),)
                       ],
                     ),
                   ),
