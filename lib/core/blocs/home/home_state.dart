@@ -28,7 +28,7 @@ class HomeState extends Equatable {
   );
   
   @override
-  List<Object?> get props => [isLoadingMethosPay, methodsPay];
+  List<Object?> get props => [isLoadingMethosPay, methodsPay, discount];
 }
 
 final class HomeInitial extends HomeState {}
