@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     final homeBloc = BlocProvider.of<HomeBloc>(context);
-    homeBloc.getMethodsPay();
+    homeBloc.getProducts();
     super.initState();
   }
 
