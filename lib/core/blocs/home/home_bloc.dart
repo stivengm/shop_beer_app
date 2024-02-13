@@ -43,6 +43,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       add( const IsLoader(isLoadingMethosPay: false) );
       add( MethodsPay(methodsModel) );
     }
+    getDiscounts();
   }
 
   Future getDiscounts() async {

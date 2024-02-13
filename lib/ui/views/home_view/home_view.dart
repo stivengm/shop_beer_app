@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_beer_app/core/blocs/home/home_bloc.dart';
 import 'package:shop_beer_app/ui/drawers/home_drawer.dart';
+import 'package:shop_beer_app/ui/views/home_view/widgets/discount.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/medios_pay.dart';
 import 'package:shop_beer_app/ui/widgets/loader_view.dart';
 
@@ -26,13 +27,14 @@ class _HomeViewState extends State<HomeView> {
 
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return state.isLoadingMethosPay ? const LoaderWidget() : 
+        return state.isLoadingMethosPay && state.isLoadingDiscount ? const LoaderWidget() : 
         Scaffold(
           key: scaffoldKey,
           appBar: AppBar(),
           drawer: HomeMenu(scaffoldKey: scaffoldKey),
           body: Column(
             children: [
+              state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
               state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox()
             ],
           )
