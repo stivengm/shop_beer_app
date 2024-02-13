@@ -38,7 +38,33 @@ class _HomeViewState extends State<HomeView> {
         Scaffold(
           key: scaffoldKey,
           backgroundColor: backgroundApp,
-          appBar: AppBar(),
+          appBar: AppBar(
+            actions: [
+              Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.notifications_none_outlined,
+                      size: 27,
+                    ),
+                    onPressed: () {}, 
+                  ),
+                  Positioned(
+                    top: 13,
+                    left: 13,
+                    child: Container(
+                      width: 9.0,
+                      height: 9.0,
+                      decoration: BoxDecoration(
+                        // color: Colors.red,
+                        borderRadius: BorderRadius.circular(20)
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
           drawer: HomeMenu(scaffoldKey: scaffoldKey),
           body: RefreshIndicator(
             onRefresh: () {
