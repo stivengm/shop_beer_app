@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_beer_app/core/config/paths.dart';
+import 'package:shop_beer_app/core/services/push_notifications_service.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PushNotificationsService.initializeApp();
   runApp(const MyApp());
 }
 

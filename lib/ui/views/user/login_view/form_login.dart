@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:shop_beer_app/core/blocs/login/login_bloc.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
+import 'package:shop_beer_app/ui/widgets/notifications_widget.dart';
 import 'package:shop_beer_app/ui/widgets/primary_button.dart';
 
 class FormLogin extends StatefulWidget {
@@ -126,20 +127,20 @@ class _FormLoginState extends State<FormLogin> {
     final isValidForm = formKey.currentState!.validate();
     if (!isValidForm) return;
 
-    // try {
-    //   final loginBloc = BlocProvider.of<LoginBloc>(context);
-    //   final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
-    //     email: emailController.text.trim(), 
-    //     password: passwordController.text.trim()
-    //   );
-    //   // response.user;
-    //   // loginBloc.add( InfoUser(response.user) );
-    //   loginBloc.add( const IsLogguedUser(true) );
-    //   print(response);
-    // } on FirebaseException catch (e) {
-    //   NotificationsWidget(message: e.message!,).showNotificationError(context);
-    //   return;
-    // }
+    try {
+      // final loginBloc = BlocProvider.of<LoginBloc>(context);
+      final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(), 
+        password: passwordController.text.trim()
+      );
+      // response.user;
+      // loginBloc.add( InfoUser(response.user) );
+      // loginBloc.add( const IsLogguedUser(true) );
+      print(response);
+    } on FirebaseException catch (e) {
+      NotificationsWidget(message: e.message!,).showNotificationError(context);
+      return;
+    }
 
     Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
 
