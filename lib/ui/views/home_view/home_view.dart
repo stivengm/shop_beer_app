@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
                       Icons.notifications_none_outlined,
                       size: 27,
                     ),
-                    onPressed: () {}, 
+                    onPressed: () => Navigator.pushNamed(context, 'notifications'), 
                   ),
                   Positioned(
                     top: 13,
