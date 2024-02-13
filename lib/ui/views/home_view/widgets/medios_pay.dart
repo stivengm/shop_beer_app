@@ -25,7 +25,7 @@ class MediosPay extends StatelessWidget {
               itemBuilder: ( BuildContext context, int index ) => Container(
                 margin: const EdgeInsets.only(right: 5.0),
                 width: 100.0,
-                child: Image.network(methodsPay![index].img!, fit: BoxFit.contain,),
+                child: Image.network(methodsPay![index].img, fit: BoxFit.contain,),
               )
             ),
           )
