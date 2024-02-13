@@ -156,7 +156,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   timerLoaderBeer() {
-    Future.delayed(const Duration(seconds: 8), () {
+    Future.delayed(const Duration(seconds: 10), () {
       add( const IsLoader( isLoadingBeer: false ) );
     });
   }
