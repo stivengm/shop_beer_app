@@ -6,3 +6,8 @@ sealed class LoginEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class IsLoading extends LoginEvent {
+  final bool isLoading;
+  const IsLoading(this.isLoading);
+}

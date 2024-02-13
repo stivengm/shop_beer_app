@@ -9,5 +9,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<LoginEvent>((event, emit) {
       // TODO: implement event handler
     });
+
+    on<IsLoading>((event, emit) {
+      emit( state.copyWith( isLoading: event.isLoading ) );
+    });
   }
 }

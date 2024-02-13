@@ -1,7 +1,17 @@
 part of 'login_bloc.dart';
 
-sealed class LoginState extends Equatable {
-  const LoginState();
+class LoginState extends Equatable {
+  final bool isLoading;
+
+  const LoginState({
+    this.isLoading = false
+  });
+
+  LoginState copyWith({
+    bool? isLoading
+  }) => LoginState(
+    isLoading: isLoading ?? this.isLoading
+  );
   
   @override
   List<Object> get props => [];
