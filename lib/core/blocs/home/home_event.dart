@@ -9,10 +9,16 @@ sealed class HomeEvent extends Equatable {
 
 class IsLoader extends HomeEvent {
   final bool? isLoadingMethosPay;
-  const IsLoader({this.isLoadingMethosPay});
+  final bool? isLoadingDiscount;
+  const IsLoader({this.isLoadingMethosPay, this.isLoadingDiscount});
 }
 
 class MethodsPay extends HomeEvent {
   final List<MethodsPayModel> methodsPay;
   const MethodsPay(this.methodsPay);
+}
+
+class Discount extends HomeEvent {
+  final List<DiscountModel> discount;
+  const Discount(this.discount);
 }
