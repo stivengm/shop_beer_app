@@ -52,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   const SizedBox(height: 25.0),
-                  state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
+                  state.discount!.isNotEmpty && state.discount![0].show ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
                   state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox(),
                   state.productBeer!.isNotEmpty ? SectionProducts(nameCategory: "Cerveza", products: state.productBeer!) : const SizedBox(),
                   state.productAguardiente!.isNotEmpty ? SectionProducts(nameCategory: "Aguardiente", products: state.productAguardiente!) : const SizedBox(),
