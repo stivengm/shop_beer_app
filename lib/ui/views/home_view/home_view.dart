@@ -49,20 +49,7 @@ class _HomeViewState extends State<HomeView> {
                 state.productBeer!.isNotEmpty ? SectionProducts(nameCategory: "Cerveza", products: state.productBeer!) : const SizedBox(),
                 state.productAguardiente!.isNotEmpty ? SectionProducts(nameCategory: "Aguardiente", products: state.productAguardiente!) : const SizedBox(),
                 state.productRon!.isNotEmpty ? SectionProducts(nameCategory: "Ron", products: state.productRon!) : const SizedBox(),
-                // Container(
-                //   width: 100.0,
-                //   height: 300.0,
-                //   decoration: BoxDecoration(
-                //     color: Colors.red
-                //   ),
-                //   child: ListView.builder(
-                //     scrollDirection: Axis.horizontal,
-                //     itemCount: state.products!.length,
-                //     itemBuilder: ( BuildContext context, int index ) => Container(
-                //       child: Text(state.products![index].name)
-                //     )
-                //   )
-                // )
+                const SizedBox(height: 25.0),
               ],
             ),
           )
