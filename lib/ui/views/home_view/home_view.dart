@@ -40,17 +40,26 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: backgroundApp,
           appBar: AppBar(),
           drawer: HomeMenu(scaffoldKey: scaffoldKey),
-          body: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 25.0),
-                state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
-                state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox(),
-                state.productBeer!.isNotEmpty ? SectionProducts(nameCategory: "Cerveza", products: state.productBeer!) : const SizedBox(),
-                state.productAguardiente!.isNotEmpty ? SectionProducts(nameCategory: "Aguardiente", products: state.productAguardiente!) : const SizedBox(),
-                state.productRon!.isNotEmpty ? SectionProducts(nameCategory: "Ron", products: state.productRon!) : const SizedBox(),
-                const SizedBox(height: 25.0),
-              ],
+          body: RefreshIndicator(
+            onRefresh: () {
+              return Future.delayed( const Duration( seconds: 3), 
+              () {
+                final homeBloc = BlocProvider.of<HomeBloc>(context);
+                homeBloc.getProducts();
+              });
+            },
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const SizedBox(height: 25.0),
+                  state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
+                  state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox(),
+                  state.productBeer!.isNotEmpty ? SectionProducts(nameCategory: "Cerveza", products: state.productBeer!) : const SizedBox(),
+                  state.productAguardiente!.isNotEmpty ? SectionProducts(nameCategory: "Aguardiente", products: state.productAguardiente!) : const SizedBox(),
+                  state.productRon!.isNotEmpty ? SectionProducts(nameCategory: "Ron", products: state.productRon!) : const SizedBox(),
+                  const SizedBox(height: 25.0),
+                ],
+              ),
             ),
           )
         );
