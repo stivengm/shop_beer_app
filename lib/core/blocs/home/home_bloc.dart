@@ -52,9 +52,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     var response = await http.get(url);
     if (response.statusCode == 200) {
       final jsonDiscountModel = jsonDecode(response.body);
-      print(jsonDiscountModel);
       final List<DiscountModel> discountModel = jsonDiscountModel.map<DiscountModel>((m) => DiscountModel.fromJson(Map<String, dynamic>.from(m))).toList();
-      print(discountModel);
       add( Discount(discountModel) );
       add( const IsLoader(isLoadingDiscount: false) );
     }
