@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_beer_app/core/blocs/home/home_bloc.dart';
+import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/drawers/home_drawer.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/discount.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/medios_pay.dart';
@@ -33,6 +34,7 @@ class _HomeViewState extends State<HomeView> {
         const LoaderWidget() : 
         Scaffold(
           key: scaffoldKey,
+          backgroundColor: backgroundApp,
           appBar: AppBar(),
           drawer: HomeMenu(scaffoldKey: scaffoldKey),
           body: Column(
