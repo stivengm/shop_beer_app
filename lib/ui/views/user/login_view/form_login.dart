@@ -133,7 +133,7 @@ class _FormLoginState extends State<FormLogin> {
     FocusManager.instance.primaryFocus?.unfocus();
 
     try {
-      // loginBloc.add( const IsLoading(true) );
+      loginBloc.add( const IsLoading(true) );
       final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(), 
         password: passwordController.text.trim()
@@ -156,14 +156,16 @@ class _FormLoginState extends State<FormLogin> {
         default:
       }
 
-      // loginBloc.add( const IsLoading(false) );
-      NotificationsWidget(message: message == '' ? e.message! : message).showNotificationError(context);
+      Future.delayed(const Duration(seconds: 8), () {
+        loginBloc.add( const IsLoading(false) );
+        NotificationsWidget(message: message == '' ? e.message! : message).showNotificationError(context);
+      });
       return;
     }
 
-    // loginBloc.add( const IsLoading(false) );
-    // Future.delayed(const Duration(seconds: 8), () {
-    // });
+    Future.delayed(const Duration(seconds: 8), () {
+      loginBloc.add( const IsLoading(false) );
+    });
     Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
 
   }
