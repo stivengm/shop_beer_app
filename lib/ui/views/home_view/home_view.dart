@@ -30,18 +30,35 @@ class _HomeViewState extends State<HomeView> {
       builder: (context, state) {
         return state.isLoadingMethosPay 
             && state.isLoadingDiscount 
-            && state.isLoadingStores ? 
+            && state.isLoadingStores
+            && state.isLoadingProducts ? 
         const LoaderWidget() : 
         Scaffold(
           key: scaffoldKey,
           backgroundColor: backgroundApp,
           appBar: AppBar(),
           drawer: HomeMenu(scaffoldKey: scaffoldKey),
-          body: Column(
-            children: [
-              state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
-              state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox()
-            ],
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
+                state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox(),
+                Container(
+                  width: 100.0,
+                  height: 300.0,
+                  decoration: BoxDecoration(
+                    color: Colors.red
+                  ),
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: state.products!.length,
+                    itemBuilder: ( BuildContext context, int index ) => Container(
+                      child: Text(state.products![index].name)
+                    )
+                  )
+                )
+              ],
+            ),
           )
         );
       },
