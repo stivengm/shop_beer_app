@@ -44,8 +44,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     var url = Uri.https('shop-beer-default-rtdb.firebaseio.com', 'medios_pago.json');
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      final jsonProductsModel = jsonDecode(response.body);
-      final List<MethodsPayModel> methodsModel = jsonProductsModel.map<MethodsPayModel>((m) => MethodsPayModel.fromJson(Map<String, dynamic>.from(m))).toList();
+      final jsonMethodsPayModel = jsonDecode(response.body);
+      final List<MethodsPayModel> methodsModel = jsonMethodsPayModel.map<MethodsPayModel>((m) => MethodsPayModel.fromJson(Map<String, dynamic>.from(m))).toList();
       add( const IsLoader(isLoadingMethosPay: false) );
       add( MethodsPay(methodsModel) );
     }
@@ -70,8 +70,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     var url = Uri.https('shop-beer-default-rtdb.firebaseio.com', 'lugarVenta.json');
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      final jsonDiscountModel = jsonDecode(response.body);
-      final List<StoresModel> storesModel = jsonDiscountModel.map<StoresModel>((m) => StoresModel.fromJson(Map<String, dynamic>.from(m))).toList();
+      final jsonShopModel = jsonDecode(response.body);
+      final List<StoresModel> storesModel = jsonShopModel.map<StoresModel>((m) => StoresModel.fromJson(Map<String, dynamic>.from(m))).toList();
       add( Stores(storesModel) );
       add( const IsLoader(isLoadingStores: false) );
     }
