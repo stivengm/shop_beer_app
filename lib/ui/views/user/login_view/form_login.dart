@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:email_validator/email_validator.dart';
-import 'package:shop_beer_app/core/blocs/login/login_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
@@ -138,7 +136,20 @@ class _FormLoginState extends State<FormLogin> {
       // loginBloc.add( const IsLogguedUser(true) );
       print(response);
     } on FirebaseException catch (e) {
-      NotificationsWidget(message: e.message!,).showNotificationError(context);
+      String message = '';
+      switch (e.code) {
+        case 'wrong-password':
+          message = 'La contraseña es incorrecta.';
+          break;
+        case 'too-many-requests':
+          message = 'Hemos bloqueado todas las solicitudes de este dispositivo debido a una actividad inusual. Por favor intente más tarde.';
+          break;
+        case 'user-not-found':
+          message = 'No existe ningún usuario con este correo electrónico.';
+          break;
+        default:
+      }
+      NotificationsWidget(message: message == '' ? e.message! : message).showNotificationError(context);
       return;
     }
 
