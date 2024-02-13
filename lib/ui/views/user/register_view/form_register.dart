@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/widgets/notifications_widget.dart';
 import 'package:shop_beer_app/ui/widgets/primary_button.dart';
@@ -136,10 +135,6 @@ class _FormRegisterState extends State<FormRegister> {
     } on FirebaseException catch (e) {
       // registerBloc.add( const IsLoadingApp(false) );
       String message = '';
-      print("---------------------------------------");
-      print("----- CÓDIGOS -------- ");
-      print("---------------------------------------");
-      print(e.code);
       switch (e.code) {
         case 'email-already-in-use':
           message = 'Este correo ya se encuentra en uso, por favor ingrese otro correo o inicie sesión.';
