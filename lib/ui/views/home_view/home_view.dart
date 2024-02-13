@@ -27,7 +27,10 @@ class _HomeViewState extends State<HomeView> {
 
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return state.isLoadingMethosPay && state.isLoadingDiscount ? const LoaderWidget() : 
+        return state.isLoadingMethosPay 
+            && state.isLoadingDiscount 
+            && state.isLoadingStores ? 
+        const LoaderWidget() : 
         Scaffold(
           key: scaffoldKey,
           appBar: AppBar(),
