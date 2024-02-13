@@ -33,7 +33,8 @@ class _HomeViewState extends State<HomeView> {
             || state.isLoadingMethosPay 
             || state.isLoadingDiscount 
             || state.isLoadingStores
-            || state.isLoadingProducts ? 
+            || state.isLoadingProducts 
+            || state.isLoadingNotifications ? 
         const LoaderWidget() : 
         Scaffold(
           key: scaffoldKey,
@@ -56,7 +57,7 @@ class _HomeViewState extends State<HomeView> {
                       width: 9.0,
                       height: 9.0,
                       decoration: BoxDecoration(
-                        // color: Colors.red,
+                        color: state.notifications!.isNotEmpty && state.notifications![0].show ? Colors.red : Colors.transparent,
                         borderRadius: BorderRadius.circular(20)
                       ),
                     ),
