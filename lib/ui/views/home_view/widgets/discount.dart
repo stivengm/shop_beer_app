@@ -31,7 +31,7 @@ class DiscountWidget extends StatelessWidget {
               ),
             ],
           ),
-          Text(discount[0].vencimiento, style: Theme.of(context).textTheme.headlineMedium!.copyWith( color: whiteColor, fontSize: 10.0 ),),
+          Text(discount[0].vencimiento, style: Theme.of(context).textTheme.headlineMedium!.copyWith( color: whiteColor, fontSize: 9.0 ),),
         ],
       ),
     );
