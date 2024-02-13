@@ -25,7 +25,9 @@ class _HomeMenuState extends State<HomeMenu> {
         });
 
         final menuItem = appMenuItems[value];
-        Navigator.pushNamed(context, menuItem.link);
+        if (value != 0) {
+          Navigator.pushNamed(context, menuItem.link);
+        }
         widget.scaffoldKey.currentState?.closeDrawer();
       },
       children: [
