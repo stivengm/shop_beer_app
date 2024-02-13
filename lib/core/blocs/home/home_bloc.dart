@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shop_beer_app/data/models/discount_model.dart';
 import 'package:shop_beer_app/data/models/methods_pay_model.dart';
+import 'package:shop_beer_app/data/models/products_model.dart';
 import 'package:shop_beer_app/data/models/stores_model.dart';
 
 part 'home_event.dart';
@@ -21,12 +22,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(
         isLoadingMethosPay: event.isLoadingMethosPay,
         isLoadingDiscount: event.isLoadingDiscount,
-        isLoadingStores: event.isLoadingStores
+        isLoadingStores: event.isLoadingStores,
+        isLoadingProducts: event.isLoadingProducts
       ));
     });
 
     on<MethodsPay>((event, emit) {
       emit(state.copyWith( methodsPay: event.methodsPay ));
+    });
+
+    on<Products>((event, emit) {
+      emit(state.copyWith( products: event.products ));
     });
     
     on<Discount>((event, emit) {
@@ -37,6 +43,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith( stores: event.stores ));
     });
 
+  }
+
+  Future getProducts() async {
+    add( const IsLoader(isLoadingProducts: true) );
+    var url = Uri.https('shop-beer-default-rtdb.firebaseio.com', 'products.json');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      final jsonProductsModel = jsonDecode(response.body);
+      final List<ProductsModel> productsModel = jsonProductsModel.map<ProductsModel>((m) => ProductsModel.fromJson(Map<String, dynamic>.from(m))).toList();
+      add( const IsLoader(isLoadingProducts: false) );
+      add( Products(productsModel) );
+    }
+    getMethodsPay();
   }
 
   Future getMethodsPay() async {
