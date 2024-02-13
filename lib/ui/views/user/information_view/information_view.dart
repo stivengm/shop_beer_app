@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_beer_app/core/blocs/home/home_bloc.dart';
 import 'package:shop_beer_app/data/models/stores_model.dart';
+import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/views/user/information_view/widgets/header_information.dart';
 
 class InformationView extends StatelessWidget {
@@ -13,6 +14,7 @@ class InformationView extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
+            backgroundColor: backgroundApp,
             appBar: AppBar(),
             body: SizedBox(
               height: double.infinity,
