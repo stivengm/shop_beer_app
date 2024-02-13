@@ -36,6 +36,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<Products>((event, emit) {
       emit(state.copyWith( products: event.products ));
     });
+
+    on<ProductsBeer>((event, emit) {
+      emit(state.copyWith( productBeer: event.productBeer ));
+    });
+    
+    on<ProductsAguardiente>((event, emit) {
+      emit(state.copyWith( productAguardiente: event.productAguardiente ));
+    });
+
+    on<ProductRon>((event, emit) {
+      emit(state.copyWith( productRon: event.productRon ));
+    });
     
     on<Discount>((event, emit) {
       emit(state.copyWith( discount: event.discount ));
@@ -53,7 +65,32 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     var response = await http.get(url);
     if (response.statusCode == 200) {
       final jsonProductsModel = jsonDecode(response.body);
+
+      List<ProductsModel> productBeer = [];
+      List<ProductsModel> productAguardiente = [];
+      List<ProductsModel> productRon = [];
+
       final List<ProductsModel> productsModel = jsonProductsModel.map<ProductsModel>((m) => ProductsModel.fromJson(Map<String, dynamic>.from(m))).toList();
+
+      for (var i = 0; i < productsModel.length; i++) {
+        switch (productsModel[i].typeProductId) {
+          case 1:
+            productBeer.add(productsModel[i]);
+            break;
+          case 2:
+            productAguardiente.add(productsModel[i]);
+            break;
+          case 3:
+            productRon.add(productsModel[i]);
+            break;
+          default:
+        }
+      }
+      
+      add( ProductsBeer(productBeer) );
+      add( ProductsAguardiente(productAguardiente) );
+      add( ProductRon(productRon) );
+
       add( const IsLoader(isLoadingProducts: false) );
       add( Products(productsModel) );
     }

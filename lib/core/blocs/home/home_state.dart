@@ -12,6 +12,10 @@ class HomeState extends Equatable {
   final List<DiscountModel>? discount;
   final List<StoresModel> stores;
 
+  final List<ProductsModel>? productBeer;
+  final List<ProductsModel>? productAguardiente;
+  final List<ProductsModel>? productRon;
+
   const HomeState({
     this.isLoadingBeer = false,
     this.isLoadingMethosPay = false,
@@ -22,10 +26,17 @@ class HomeState extends Equatable {
     products,
     discount,
     stores,
+
+    productBeer,
+    productAguardiente,
+    productRon
   }) : methodsPay = methodsPay ?? const [],
       products = products ?? const [],
       discount = discount ?? const [],
-      stores = stores ?? const [];
+      stores = stores ?? const [],
+      productBeer = productBeer ?? const [],
+      productAguardiente = productAguardiente ?? const [],
+      productRon = productRon ?? const [];
 
   HomeState copyWith({
     bool? isLoadingBeer,
@@ -36,7 +47,11 @@ class HomeState extends Equatable {
     List<MethodsPayModel>? methodsPay,
     List<ProductsModel>? products,
     List<DiscountModel>? discount,
-    List<StoresModel>? stores
+    List<StoresModel>? stores,
+
+    List<ProductsModel>? productBeer,
+    List<ProductsModel>? productAguardiente,
+    List<ProductsModel>? productRon
   }) => HomeState(
     isLoadingBeer: isLoadingBeer ?? this.isLoadingBeer,
     isLoadingMethosPay: isLoadingMethosPay ?? this.isLoadingMethosPay,
@@ -46,11 +61,15 @@ class HomeState extends Equatable {
     methodsPay: methodsPay ?? this.methodsPay,
     products: products ?? this.products,
     discount: discount ?? this.discount,
-    stores: stores ?? this.stores
+    stores: stores ?? this.stores,
+
+    productBeer: productBeer ?? this.productBeer,
+    productAguardiente: productAguardiente ?? this.productAguardiente,
+    productRon: productRon ?? this.productRon
   );
   
   @override
-  List<Object?> get props => [isLoadingBeer, isLoadingMethosPay, isLoadingDiscount, isLoadingProducts, isLoadingStores, methodsPay, discount, stores, isLoadingProducts, products];
+  List<Object?> get props => [isLoadingBeer, isLoadingMethosPay, isLoadingDiscount, isLoadingProducts, isLoadingStores, methodsPay, discount, stores, isLoadingProducts, products, productBeer, productAguardiente, productRon];
 }
 
 final class HomeInitial extends HomeState {}

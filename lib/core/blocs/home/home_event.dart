@@ -21,6 +21,21 @@ class Products extends HomeEvent {
   const Products(this.products);
 }
 
+class ProductsBeer extends HomeEvent {
+  final List<ProductsModel>? productBeer;
+  const ProductsBeer(this.productBeer);
+}
+
+class ProductsAguardiente extends HomeEvent {
+  final List<ProductsModel>? productAguardiente;
+  const ProductsAguardiente(this.productAguardiente);
+}
+
+class ProductRon extends HomeEvent {
+  final List<ProductsModel>? productRon;
+  const ProductRon(this.productRon);
+}
+
 class MethodsPay extends HomeEvent {
   final List<MethodsPayModel> methodsPay;
   const MethodsPay(this.methodsPay);
