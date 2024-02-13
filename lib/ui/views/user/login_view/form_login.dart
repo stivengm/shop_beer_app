@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_beer_app/core/blocs/login/login_bloc.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/widgets/notifications_widget.dart';
 import 'package:shop_beer_app/ui/widgets/primary_button.dart';
@@ -124,16 +128,18 @@ class _FormLoginState extends State<FormLogin> {
   Future signIn() async {
     final isValidForm = formKey.currentState!.validate();
     if (!isValidForm) return;
+    final loginBloc = BlocProvider.of<LoginBloc>(context);
+
+    FocusManager.instance.primaryFocus?.unfocus();
 
     try {
-      // final loginBloc = BlocProvider.of<LoginBloc>(context);
+      // loginBloc.add( const IsLoading(true) );
       final response = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(), 
         password: passwordController.text.trim()
       );
       // response.user;
       // loginBloc.add( InfoUser(response.user) );
-      // loginBloc.add( const IsLogguedUser(true) );
       print(response);
     } on FirebaseException catch (e) {
       String message = '';
@@ -149,10 +155,15 @@ class _FormLoginState extends State<FormLogin> {
           break;
         default:
       }
+
+      // loginBloc.add( const IsLoading(false) );
       NotificationsWidget(message: message == '' ? e.message! : message).showNotificationError(context);
       return;
     }
 
+    // loginBloc.add( const IsLoading(false) );
+    // Future.delayed(const Duration(seconds: 8), () {
+    // });
     Navigator.of(context).pushNamedAndRemoveUntil('home', (route) => false);
 
   }
