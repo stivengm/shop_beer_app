@@ -7,6 +7,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shop_beer_app/data/models/discount_model.dart';
 import 'package:shop_beer_app/data/models/methods_pay_model.dart';
+import 'package:shop_beer_app/data/models/notifications_model.dart';
 import 'package:shop_beer_app/data/models/products_model.dart';
 import 'package:shop_beer_app/data/models/stores_model.dart';
 
@@ -25,7 +26,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         isLoadingMethosPay: event.isLoadingMethosPay,
         isLoadingDiscount: event.isLoadingDiscount,
         isLoadingStores: event.isLoadingStores,
-        isLoadingProducts: event.isLoadingProducts
+        isLoadingProducts: event.isLoadingProducts,
+        isLoadingNotifications: event.isLoadingNotifications
       ));
     });
 
@@ -55,6 +57,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<Stores>((event, emit) {
       emit(state.copyWith( stores: event.stores ));
+    });
+
+    on<Notifications>((event, emit) {
+      emit(state.copyWith( notifications: event.notifications ));
     });
 
   }
@@ -133,6 +139,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final List<StoresModel> storesModel = jsonShopModel.map<StoresModel>((m) => StoresModel.fromJson(Map<String, dynamic>.from(m))).toList();
       add( Stores(storesModel) );
       add( const IsLoader(isLoadingStores: false) );
+    }
+    getNotifications();
+  }
+
+  Future getNotifications() async {
+    add( const IsLoader(isLoadingNotifications: true) );
+    var url = Uri.https('shop-beer-default-rtdb.firebaseio.com', 'notifications.json');
+    var response = await http.get(url);
+    if (response.statusCode == 200) {
+      final jsonNotificationsModel = jsonDecode(response.body);
+      final List<NotificationsModel> notificationsModel = jsonNotificationsModel.map<NotificationsModel>((m) => NotificationsModel.fromJson(Map<String, dynamic>.from(m))).toList();
+      add( Notifications(notificationsModel) );
+      add( const IsLoader(isLoadingNotifications: false) );
     }
   }
 

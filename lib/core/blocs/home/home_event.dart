@@ -13,7 +13,15 @@ class IsLoader extends HomeEvent {
   final bool? isLoadingDiscount;
   final bool? isLoadingProducts;
   final bool? isLoadingStores;
-  const IsLoader({this.isLoadingBeer, this.isLoadingMethosPay, this.isLoadingDiscount, this.isLoadingStores, this.isLoadingProducts});
+  final bool? isLoadingNotifications;
+  const IsLoader({
+    this.isLoadingBeer, 
+    this.isLoadingMethosPay, 
+    this.isLoadingDiscount, 
+    this.isLoadingStores, 
+    this.isLoadingProducts, 
+    this.isLoadingNotifications
+  });
 }
 
 class Products extends HomeEvent {
@@ -49,4 +57,9 @@ class Discount extends HomeEvent {
 class Stores extends HomeEvent {
   final List<StoresModel> stores;
   const Stores(this.stores);
+}
+
+class Notifications extends HomeEvent {
+  final List<NotificationsModel> notifications;
+  const Notifications(this.notifications);
 }
