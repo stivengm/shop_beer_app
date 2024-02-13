@@ -41,7 +41,7 @@ const appMenuItems = <MenuItem> [
   MenuItem(
     title: "Historial de compras",
     icon: Icons.heart_broken_outlined,
-    link: "information"
+    link: "history"
   ),
 
   MenuItem(
