@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_beer_app/data/models/products_model.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
+import 'package:shop_beer_app/ui/widgets/pipe_widget.dart';
 
 class SectionProducts extends StatelessWidget {
   final String nameCategory;
@@ -48,7 +49,7 @@ class SectionProducts extends StatelessWidget {
                     Expanded(
                       child: Text(products[i].name, textAlign: TextAlign.center,),
                     ),
-                    Text(products[i].price)
+                    Text(PipeWidget().formato(int.parse(products[i].price)))
                   ],
                 ),
               )
