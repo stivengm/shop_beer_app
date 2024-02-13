@@ -5,6 +5,7 @@ import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/drawers/home_drawer.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/discount.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/medios_pay.dart';
+import 'package:shop_beer_app/ui/views/home_view/widgets/section_products.dart';
 import 'package:shop_beer_app/ui/widgets/loader_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -42,22 +43,26 @@ class _HomeViewState extends State<HomeView> {
           body: SingleChildScrollView(
             child: Column(
               children: [
+                const SizedBox(height: 25.0),
                 state.discount!.isNotEmpty ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
                 state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox(),
-                Container(
-                  width: 100.0,
-                  height: 300.0,
-                  decoration: BoxDecoration(
-                    color: Colors.red
-                  ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.products!.length,
-                    itemBuilder: ( BuildContext context, int index ) => Container(
-                      child: Text(state.products![index].name)
-                    )
-                  )
-                )
+                state.productBeer!.isNotEmpty ? SectionProducts(nameCategory: "Cerveza", products: state.productBeer!) : const SizedBox(),
+                state.productAguardiente!.isNotEmpty ? SectionProducts(nameCategory: "Aguardiente", products: state.productAguardiente!) : const SizedBox(),
+                state.productRon!.isNotEmpty ? SectionProducts(nameCategory: "Ron", products: state.productRon!) : const SizedBox(),
+                // Container(
+                //   width: 100.0,
+                //   height: 300.0,
+                //   decoration: BoxDecoration(
+                //     color: Colors.red
+                //   ),
+                //   child: ListView.builder(
+                //     scrollDirection: Axis.horizontal,
+                //     itemCount: state.products!.length,
+                //     itemBuilder: ( BuildContext context, int index ) => Container(
+                //       child: Text(state.products![index].name)
+                //     )
+                //   )
+                // )
               ],
             ),
           )
