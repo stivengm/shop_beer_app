@@ -10,7 +10,7 @@ class HistoryCard extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0)
+        borderRadius: BorderRadius.circular(8.0)
       ),
       child: Column(
         children: [
@@ -24,10 +24,10 @@ class HistoryCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 3.0),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12.0),
+                  borderRadius: BorderRadius.circular(8.0),
                   color: const Color.fromARGB(255, 179, 250, 182)
                 ),
-                child: Text("ENTREGADO", style: Theme.of(context).textTheme.headlineMedium!.copyWith( color: Colors.green, fontSize: 12.0 ),),
+                child: Text("ENTREGADO", style: Theme.of(context).textTheme.headlineMedium!.copyWith( color: Colors.green, fontSize: 12.0, fontWeight: FontWeight.bold ),),
               ),
             ],
           ),
