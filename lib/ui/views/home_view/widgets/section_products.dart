@@ -10,13 +10,12 @@ class SectionProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.blue,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: Text(nameCategory)
+            child: Text(nameCategory, style: Theme.of(context).textTheme.titleMedium!,)
           ),
           Container(
             width: double.infinity,
