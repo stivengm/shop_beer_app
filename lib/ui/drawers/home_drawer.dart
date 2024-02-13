@@ -29,7 +29,20 @@ class _HomeMenuState extends State<HomeMenu> {
         widget.scaffoldKey.currentState?.closeDrawer();
       },
       children: [
-        ...appMenuItems.map((item) => NavigationDrawerDestination(
+        ...appMenuItems
+        .sublist(0,3)
+        .map((item) => NavigationDrawerDestination(
+          icon: Icon( item.icon ), label: Text(item.title))
+        ),
+
+        const Padding(
+          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
+          child: Divider(),
+        ),
+
+        ...appMenuItems
+        .sublist(3,6)
+        .map((item) => NavigationDrawerDestination(
           icon: Icon( item.icon ), label: Text(item.title))
         )
       ]
