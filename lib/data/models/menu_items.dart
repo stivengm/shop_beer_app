@@ -33,6 +33,12 @@ const appMenuItems = <MenuItem> [
   ),
 
   MenuItem(
+    title: "Información",
+    icon: Icons.heart_broken_outlined,
+    link: "information"
+  ),
+
+  MenuItem(
     title: "Iniciar sesión",
     icon: Icons.heart_broken_outlined,
     link: "login"
