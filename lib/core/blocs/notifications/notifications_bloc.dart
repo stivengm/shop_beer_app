@@ -11,6 +11,13 @@ part 'notifications_state.dart';
 Future <void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
+  LocalNotifications.showLocalNotifications(
+    id: 1, // message.messageId,
+    body: message.notification!.body,
+    data: "",
+    title: message.notification!.title
+  );
+
   print("Handling a background message: ${message.messageId}");
 }
 
@@ -56,10 +63,10 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
 
     LocalNotifications.showLocalNotifications(
-      id: 1,
-      body: "<body>",
-      data: "<data>",
-      title: "Hola desde el app"
+      id: 1, // message.messageId,
+      body: message.notification!.body,
+      data: "",
+      title: message.notification!.title
     );
 
     print('message notifications: ${message.notification}');
@@ -98,4 +105,11 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
     add( NotificationsStatusChanged(settings.authorizationStatus));
   }
+
+  // PushMessage? getMessageById( String pushMessageId ) {
+  //   final exist = state.notifications.any((element) => element.messageId == pushMessageId );
+  //   if ( !exist ) return null;
+
+  //   return state.notifications.firstWhere((element) => element.messageId == pushMessageId );
+  // }
 }
