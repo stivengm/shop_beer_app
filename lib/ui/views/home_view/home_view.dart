@@ -58,10 +58,11 @@ class _HomeViewState extends State<HomeView> {
                       Icons.notifications_none_outlined,
                       size: 27,
                     ),
-                    // onPressed: () => Navigator.pushNamed(context, 'notifications'), 
-                    onPressed: () {
-                      notificationsBloc.getToken();
-                    },
+                    onPressed: () => Navigator.pushNamed(context, 'notifications'), 
+                    // onPressed: () {
+                    //   // notificationsBloc.getToken();
+                    //   notificationsBloc.localNotifications();
+                    // },
                   ),
                   Positioned(
                     top: 13,
