@@ -95,7 +95,7 @@ class _HomeViewState extends State<HomeView> {
                   GestureDetector(
                     child: Text(notificationsBloc.state.token),
                     onLongPress: () {
-                      Clipboard.setData(new ClipboardData(text: notificationsBloc.state.token));
+                      Clipboard.setData(ClipboardData(text: notificationsBloc.state.token));
 
                     }
                   ),
