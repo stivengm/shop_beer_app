@@ -48,7 +48,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: backgroundApp,
           appBar: AppBar(
             title: context.select(
-              (NotificationsBloc notificationsBloc) => Text("${notificationsBloc.state.status}", style: TextStyle(fontSize: 13.0),)
+              (NotificationsBloc notificationsBloc) => Text("${notificationsBloc.state.status}", style: const TextStyle(fontSize: 13.0),)
             ),
             actions: [
               Stack(
