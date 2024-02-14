@@ -5,20 +5,25 @@ class NotificationsState extends Equatable {
   // TODO: Crear mi modelo de notificaciones
   final List<dynamic> notifications;
 
+  final String token;
+
   const NotificationsState({
     this.status = AuthorizationStatus.notDetermined,
-    this.notifications = const[]
+    this.notifications = const[],
+    this.token = '',
   });
 
   NotificationsState copyWith ({
     AuthorizationStatus? status,
     List<dynamic>? notifications,
+    String? token
   }) => NotificationsState(
     status: status ?? this.status,
-    notifications: notifications ?? this.notifications
+    notifications: notifications ?? this.notifications,
+    token: token ?? this.token
   );
   
   @override
-  List<Object> get props => [status, notifications];
+  List<Object> get props => [status, notifications, token];
 }
 
