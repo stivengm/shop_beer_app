@@ -11,7 +11,6 @@ class PrimaryButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: TextButton(
-        child: Text(text, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: whiteColor)),
         style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(12.0)),
           foregroundColor: MaterialStateProperty.all<Color>(whiteColor),
@@ -24,6 +23,7 @@ class PrimaryButton extends StatelessWidget {
           )
         ),
         onPressed: onPressed,
+        child: Text(text, style: Theme.of(context).textTheme.titleLarge!.copyWith(color: whiteColor)),
       ),
     );
   }
