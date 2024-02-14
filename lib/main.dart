@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +9,7 @@ import 'package:shop_beer_app/core/providers/bloc_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await NotificationsBloc.initializeFirebaseCloudMessage();
   runApp(const MyApp());
 }
