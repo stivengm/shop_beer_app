@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_beer_app/core/blocs/home/home_bloc.dart';
+import 'package:shop_beer_app/core/blocs/notifications/notifications_bloc.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/drawers/home_drawer.dart';
 import 'package:shop_beer_app/ui/views/home_view/widgets/discount.dart';
@@ -20,11 +23,15 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     final homeBloc = BlocProvider.of<HomeBloc>(context);
     homeBloc.getProducts();
+    final notificationsBloc = BlocProvider.of<NotificationsBloc>(context);
+    notificationsBloc.requestPermission();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final notificationsBloc = BlocProvider.of<NotificationsBloc>(context);
+    
     final scaffoldKey = GlobalKey<ScaffoldState>();
 
     return BlocBuilder<HomeBloc, HomeState>(
@@ -40,6 +47,9 @@ class _HomeViewState extends State<HomeView> {
           key: scaffoldKey,
           backgroundColor: backgroundApp,
           appBar: AppBar(
+            title: context.select(
+              (NotificationsBloc notificationsBloc) => Text("${notificationsBloc.state.status}", style: TextStyle(fontSize: 13.0),)
+            ),
             actions: [
               Stack(
                 children: [
@@ -48,7 +58,10 @@ class _HomeViewState extends State<HomeView> {
                       Icons.notifications_none_outlined,
                       size: 27,
                     ),
-                    onPressed: () => Navigator.pushNamed(context, 'notifications'), 
+                    // onPressed: () => Navigator.pushNamed(context, 'notifications'), 
+                    onPressed: () {
+                      notificationsBloc.getToken();
+                    },
                   ),
                   Positioned(
                     top: 13,
@@ -79,6 +92,13 @@ class _HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   const SizedBox(height: 25.0),
+                  GestureDetector(
+                    child: Text(notificationsBloc.state.token),
+                    onLongPress: () {
+                      Clipboard.setData(new ClipboardData(text: notificationsBloc.state.token));
+
+                    }
+                  ),
                   state.discount!.isNotEmpty && state.discount![0].show ? DiscountWidget(discount: state.discount!,) : const SizedBox(),
                   state.methodsPay!.isNotEmpty ? MediosPay(methodsPay: state.methodsPay) : const SizedBox(),
                   state.productBeer!.isNotEmpty ? SectionProducts(nameCategory: "Cerveza", products: state.productBeer!) : const SizedBox(),
