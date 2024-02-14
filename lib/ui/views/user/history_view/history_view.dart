@@ -10,9 +10,9 @@ class HistoryView extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundApp,
       appBar: AppBar(),
-      body: SingleChildScrollView(
+      body:const SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+          padding: EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
           child: Column(
             children: [
               HistoryCard(),
