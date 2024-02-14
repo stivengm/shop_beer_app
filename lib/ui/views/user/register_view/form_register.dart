@@ -1,5 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_beer_app/core/blocs/login/login_bloc.dart';
+import 'package:shop_beer_app/core/blocs/notifications/notifications_bloc.dart';
 import 'package:shop_beer_app/ui/app_style.dart';
 import 'package:shop_beer_app/ui/widgets/notifications_widget.dart';
 import 'package:shop_beer_app/ui/widgets/primary_button.dart';
@@ -123,17 +126,18 @@ class _FormRegisterState extends State<FormRegister> {
     final isValidForm = formKey.currentState!.validate();
     if (!isValidForm) return;
 
-    // final registerBloc = BlocProvider.of<RegisterBloc>(context);
-    // registerBloc.add( const IsLoadingApp(true) );
+    FocusManager.instance.primaryFocus?.unfocus();
+
+    final loginBloc = BlocProvider.of<LoginBloc>(context);
+    final notificationsBloc = BlocProvider.of<NotificationsBloc>(context);
+    loginBloc.add( const IsLoading(true) );
 
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text.trim(), 
         password: passwordController.text.trim()
       );
-      // registerBloc.add( const IsLoadingApp(false) );
     } on FirebaseException catch (e) {
-      // registerBloc.add( const IsLoadingApp(false) );
       String message = '';
       switch (e.code) {
         case 'email-already-in-use':
@@ -141,10 +145,20 @@ class _FormRegisterState extends State<FormRegister> {
           break;
         default:
       }
+      Future.delayed(const Duration(seconds: 8), () {
+        loginBloc.add( const IsLoading(false) );
+        NotificationsWidget(message: message == '' ? e.message! : message).showNotificationError(context);
+      });
       NotificationsWidget(message: message).showNotificationError(context);
     }
 
-    // Navigator.pop(context);
+    Future.delayed(const Duration(seconds: 8), () {
+      notificationsBloc.localNotifications(
+        body: 'Te has registrado a ShopBeer'
+      );
+      loginBloc.add( const IsLoading(false) );
+    });
+    Navigator.pop(context);
 
   }
 

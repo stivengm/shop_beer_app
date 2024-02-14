@@ -76,12 +76,12 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
     FirebaseMessaging.onMessage.listen(_handleRemoteMessage);
   }
 
-  localNotifications() {
+  localNotifications({String? title, required String body}) {
     LocalNotifications.showLocalNotifications(
       id: 1, // message.messageId,
-      body: "message.notification!.body",
+      body: body,
       data: "",
-      title: "message.notification!.title"
+      title: title ?? 'ShopBeer'
     );
   }
 
