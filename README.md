@@ -1,6 +1,6 @@
-# shop_beer_app
+# ShopBeerApp
 
-A new Flutter project.
+Este proyecto está desarrollado en Flutter con versión 3.20.0
 
 ## Getting Started
 
