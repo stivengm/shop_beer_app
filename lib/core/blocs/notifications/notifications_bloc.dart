@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:shop_beer_app/core/config/local_notifications.dart';
 import 'package:shop_beer_app/firebase_options.dart';
 
 part 'notifications_event.dart';
@@ -53,6 +54,14 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
     if (message.notification == null) return;
 
+
+    LocalNotifications.showLocalNotifications(
+      id: 1,
+      body: "<body>",
+      data: "<data>",
+      title: "Hola desde el app"
+    );
+
     print('message notifications: ${message.notification}');
   }
 
@@ -83,6 +92,9 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
       provisional: false,
       sound: true
     );
+
+    // Solicitar permiso a las Local Notifications
+    await LocalNotifications.requestPermissionLocalNotifications();
 
     add( NotificationsStatusChanged(settings.authorizationStatus));
   }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shop_beer_app/core/blocs/notifications/notifications_bloc.dart';
+import 'package:shop_beer_app/core/config/local_notifications.dart';
 import 'package:shop_beer_app/core/config/paths.dart';
 import 'package:shop_beer_app/core/providers/bloc_provider.dart';
 
@@ -11,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await NotificationsBloc.initializeFirebaseCloudMessage();
+  await LocalNotifications.initializeLocalNotifications();
   runApp(const MyApp());
 }
 
