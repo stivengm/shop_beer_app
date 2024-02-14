@@ -14,7 +14,7 @@ class MediosPay extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          Text("Nuestros métodos de pago"),
+          const Text("Nuestros métodos de pago"),
           Container(
             padding: const EdgeInsets.all(3),
             width: double.infinity,
