@@ -31,7 +31,7 @@ class HistoryCard extends StatelessWidget {
               ),
             ],
           ),
-          Text("Se compró esto: ")
+          const Text("Se compró esto: ")
         ],
       ),
     );
